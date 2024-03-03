@@ -505,6 +505,12 @@ namespace N_m3u8DL_CLI
                             segIndex--;
                             hasAd = true;
                         }
+                        // 分片url与Baseurl不一致的情况一律视作广告，剔除
+                        if (segUrl.StartsWith(BaseUrl))
+                        {
+                            segments.RemoveAt(segments.Count - 1);
+                            segIndex--;
+                        }
                         expectSegment = false;
                     }
                     //解析STREAM属性的URI
