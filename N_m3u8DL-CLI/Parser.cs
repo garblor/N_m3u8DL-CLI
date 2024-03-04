@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using NiL.JS.BaseLibrary;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -72,6 +73,11 @@ namespace N_m3u8DL_CLI
         public string KeyIV { get; set; } = string.Empty;
 
         public void Parse()
+        {
+            Parse(null);
+        }
+
+        public void Parse(MyOptions o)
         {
             FFmpeg.REC_TIME = "";
 
@@ -506,7 +512,7 @@ namespace N_m3u8DL_CLI
                             hasAd = true;
                         }
                         //分片的uri与BaseUrl不一致的一律视为广告
-                        if (!segUrl.StartsWith(BaseUrl))
+                        if (o.EnableMatchUrl && DetermineIsAd(segUrl, BaseUrl))
                         {
                             segments.RemoveAt(segments.Count - 1);
                             segIndex--;
@@ -810,6 +816,48 @@ namespace N_m3u8DL_CLI
             File.WriteAllText(jsonSavePath, jsonResult.ToString());
             //检测是否为master list
             MasterListCheck();
+        }
+
+        private bool DetermineIsAd(string segUrl, string baseUrl)
+        {
+            //分片的uri与BaseUrl一致的一律不视为广告
+            if (segUrl.StartsWith(baseUrl))
+                return false;
+            string strShort, strLong;
+            if (segUrl.Length <= baseUrl.Length)
+            {
+                strShort = segUrl;
+                strLong = baseUrl;
+            }
+            else
+            {
+                strShort = baseUrl;
+                strLong = segUrl;
+            }
+            
+            /*
+             * 理解以下逻辑：
+             * i,j 分别作为短字符串的前后两组下标，循环往内收缩，
+             * 当第一次截取到的字符串能与长字符串匹配时，则当前字符串为最长公共子串
+             * 当最长公共子串长度大于 “7” 时认为分片地址与目标地址具有相关性，判断该分片不为广告
+             */
+            for (int j = strShort.Length; j > 0; j--)
+            {
+                int i = 0;
+                if (baseUrl.StartsWith("http://"))
+                    i = "http://".Length;
+                if (baseUrl.StartsWith("https://"))
+                    i = "https://".Length;
+                for (; i < j; i++)
+                {
+                    string subStr = strShort.Substring(i, j-i);
+                    if (strLong.Contains(subStr) && subStr.Length >= 7)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         bool downloadingM3u8KeyTip = false;

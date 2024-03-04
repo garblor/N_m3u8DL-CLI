@@ -366,7 +366,7 @@ namespace N_m3u8DL_CLI.NetCore
                 }
                 else
                 {
-                    parser.Parse();  //开始解析
+                    parser.Parse(o);  //开始解析
                 }
 
                 //仅解析模式

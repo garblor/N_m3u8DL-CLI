@@ -106,5 +106,7 @@ namespace N_m3u8DL_CLI
         [Option("chaCha20NonceBase64", HelpText = "ChaCha20NonceBase64")]
         public string ChaCha20NonceBase64 { get; set; }
 
+        [Option("enableMatchUrl", HelpText = "EnableMatchUrl")]
+        public bool EnableMatchUrl { get; set; }
     }
 }
