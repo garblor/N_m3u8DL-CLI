@@ -13,55 +13,55 @@ namespace N_m3u8DL_CLI
         [Value(0, Hidden = true, MetaName = "Input Source", HelpText = "Help_input", ResourceType = typeof(strings))]
         public string Input { get; set; }
 
-        [Option("workDir", HelpText = "Help_workDir", ResourceType = typeof(strings))]
+        [Option('w', "workDir", HelpText = "Help_workDir", ResourceType = typeof(strings))]
         public string WorkDir { get; set; }
 
-        [Option("saveName", HelpText = "Help_saveName", ResourceType = typeof(strings))]
+        [Option('s', "saveName", HelpText = "Help_saveName", ResourceType = typeof(strings))]
         public string SaveName { get; set; } = "";
 
-        [Option("baseUrl", HelpText = "Help_baseUrl", ResourceType = typeof(strings))]
+        [Option('b', "baseUrl", HelpText = "Help_baseUrl", ResourceType = typeof(strings))]
         public string BaseUrl { get; set; }
 
-        [Option("headers", HelpText = "Help_headers", ResourceType = typeof(strings))]
+        [Option('h', "headers", HelpText = "Help_headers", ResourceType = typeof(strings))]
         public string Headers { get; set; } = "";
 
-        [Option("maxThreads", Default = 32U, HelpText = "Help_maxThreads", ResourceType = typeof(strings))]
+        [Option('m', "maxThreads", Default = 32U, HelpText = "Help_maxThreads", ResourceType = typeof(strings))]
         public uint MaxThreads { get; set; }
 
-        [Option("minThreads", Default = 16U, HelpText = "Help_minThreads", ResourceType = typeof(strings))]
+        [Option('i', "minThreads", Default = 16U, HelpText = "Help_minThreads", ResourceType = typeof(strings))]
         public uint MinThreads { get; set; }
 
-        [Option("retryCount", Default = 15U, HelpText = "Help_retryCount", ResourceType = typeof(strings))]
+        [Option('r', "retryCount", Default = 15U, HelpText = "Help_retryCount", ResourceType = typeof(strings))]
         public uint RetryCount { get; set; }
 
-        [Option("timeOut", Default = 10U, HelpText = "Help_timeOut", ResourceType = typeof(strings))]
+        [Option('t', "timeOut", Default = 10U, HelpText = "Help_timeOut", ResourceType = typeof(strings))]
         public uint TimeOut { get; set; }
 
-        [Option("muxSetJson", HelpText = "Help_muxSetJson", ResourceType = typeof(strings))]
+        [Option('u', "muxSetJson", HelpText = "Help_muxSetJson", ResourceType = typeof(strings))]
         public string MuxSetJson { get; set; }
 
-        [Option("useKeyFile", HelpText = "Help_useKeyFile", ResourceType = typeof(strings))]
+        [Option('e', "useKeyFile", HelpText = "Help_useKeyFile", ResourceType = typeof(strings))]
         public string UseKeyFile { get; set; }
 
-        [Option("useKeyBase64", HelpText = "Help_useKeyBase64", ResourceType = typeof(strings))]
+        [Option('k', "useKeyBase64", HelpText = "Help_useKeyBase64", ResourceType = typeof(strings))]
         public string UseKeyBase64 { get; set; }
 
-        [Option("useKeyIV", HelpText = "Help_useKeyIV", ResourceType = typeof(strings))]
+        [Option('y', "useKeyIV", HelpText = "Help_useKeyIV", ResourceType = typeof(strings))]
         public string UseKeyIV { get; set; }
 
-        [Option("downloadRange", HelpText = "Help_downloadRange", ResourceType = typeof(strings))]
+        [Option('d', "downloadRange", HelpText = "Help_downloadRange", ResourceType = typeof(strings))]
         public string DownloadRange { get; set; }
 
-        [Option("liveRecDur", HelpText = "Help_liveRecDur", ResourceType = typeof(strings))]
+        [Option('l', "liveRecDur", HelpText = "Help_liveRecDur", ResourceType = typeof(strings))]
         public string LiveRecDur { get; set; }
 
-        [Option("stopSpeed", HelpText = "Help_stopSpeed", ResourceType = typeof(strings))]
+        [Option('t', "stopSpeed", HelpText = "Help_stopSpeed", ResourceType = typeof(strings))]
         public long StopSpeed { get; set; } = 0L;
 
-        [Option("maxSpeed", HelpText = "Help_maxSpeed", ResourceType = typeof(strings))]
+        [Option('a', "maxSpeed", HelpText = "Help_maxSpeed", ResourceType = typeof(strings))]
         public long MaxSpeed { get; set; } = 0L;
 
-        [Option("proxyAddress", HelpText = "Help_proxyAddress", ResourceType = typeof(strings))]
+        [Option('o', "proxyAddress", HelpText = "Help_proxyAddress", ResourceType = typeof(strings))]
         public string ProxyAddress { get; set; }
 
         [Option("enableDelAfterDone", HelpText = "Help_enableDelAfterDone", ResourceType = typeof(strings))]
@@ -100,13 +100,13 @@ namespace N_m3u8DL_CLI
         [Option("enableChaCha20", HelpText = "enableChaCha20")]
         public bool EnableChaCha20 { get; set; }
 
-        [Option("chaCha20KeyBase64", HelpText = "ChaCha20KeyBase64")]
+        [Option('h', "chaCha20KeyBase64", HelpText = "ChaCha20KeyBase64")]
         public string ChaCha20KeyBase64 { get; set; }
 
-        [Option("chaCha20NonceBase64", HelpText = "ChaCha20NonceBase64")]
+        [Option('n', "chaCha20NonceBase64", HelpText = "ChaCha20NonceBase64")]
         public string ChaCha20NonceBase64 { get; set; }
 
-        [Option("enableMatchUrl", HelpText = "EnableMatchUrl")]
-        public bool EnableMatchUrl { get; set; }
+        [Option('g', "urlMatchLength", Default = 0U, HelpText = "url match length")]
+        public uint UrlMatchLength { get; set; }
     }
 }

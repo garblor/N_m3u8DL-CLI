@@ -512,7 +512,7 @@ namespace N_m3u8DL_CLI
                             hasAd = true;
                         }
                         //分片的uri与BaseUrl不一致的一律视为广告
-                        if (o.EnableMatchUrl && DetermineIsAd(segUrl, BaseUrl))
+                        if (DetermineIsAd(segUrl, BaseUrl, o.UrlMatchLength))
                         {
                             segments.RemoveAt(segments.Count - 1);
                             segIndex--;
@@ -818,7 +818,14 @@ namespace N_m3u8DL_CLI
             MasterListCheck();
         }
 
-        private bool DetermineIsAd(string segUrl, string baseUrl)
+        /**
+         * 判断当前分片是否为广告
+         * @param segUrl -> 分片URL
+         * @param baseUrl -> 原始视频基础URL
+         * @param urlMatchLength -> 两个URL匹配长度，当匹配长度超过该值时认为相关度高，当前分片不为广告
+         * 
+         */
+        private bool DetermineIsAd(string segUrl, string baseUrl, uint urlMatchLength)
         {
             //分片的uri与BaseUrl一致的一律不视为广告
             if (segUrl.StartsWith(baseUrl))
@@ -851,7 +858,7 @@ namespace N_m3u8DL_CLI
                 for (; i < j; i++)
                 {
                     string subStr = strShort.Substring(i, j-i);
-                    if (strLong.Contains(subStr) && subStr.Length >= 7)
+                    if (strLong.Contains(subStr) && subStr.Length >= urlMatchLength)
                     {
                         return false;
                     }
